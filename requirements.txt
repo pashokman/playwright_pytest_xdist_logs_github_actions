@@ -1,0 +1,4 @@
+pytest-playwright
+playwright
+pyclean
+pytest-xdist
