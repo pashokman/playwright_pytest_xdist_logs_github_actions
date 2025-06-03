@@ -2,3 +2,5 @@ pytest-playwright
 playwright
 pyclean
 pytest-xdist
+pytest-allure-adaptor
+allure-pytest
