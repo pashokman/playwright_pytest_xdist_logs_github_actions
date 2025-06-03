@@ -13,4 +13,9 @@ pytest -v -s -k test_item_names_text --browser webkit -n 3
 3. Check the results in `automation.log` file. 
 
 You can download log file after test run completed.
-You can download allure-report after test run completed. 
+
+You can download allure-report after test run completed.  
+To see actual results of allure-report, download allure artifact, extract folder from a zip file, run command:
+```
+allure serve allure-results
+```
