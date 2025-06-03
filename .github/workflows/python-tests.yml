@@ -19,7 +19,6 @@ jobs:
           pip install -r requirements.txt
           pip install allure-pytest
 
-
       - name: Install Playwright browsers
         run: |
           playwright install
@@ -33,11 +32,6 @@ jobs:
       - name: Run tests
         run: |
           pytest -v -s -n 3 --alluredir=allure-results
-
-      # - name: List files after tests
-      #   run: |
-      #     dir
-      #     dir allure-results
 
       - name: Upload log artifact
         uses: actions/upload-artifact@v4
