@@ -1,6 +1,9 @@
 import os
-import shutil
+import allure
+import glob
 import pytest
+import shutil
+
 from pages.login_page import LoginPage
 from playwright.sync_api import Page
 from utils.logs.logger import Logger
@@ -56,3 +59,23 @@ def pytest_sessionstart(session):
     if os.path.exists(img_vid_dir):
         shutil.rmtree(img_vid_dir)
         os.makedirs(img_vid_dir)
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    # Execute all other hooks to obtain the report object
+    outcome = yield
+    rep = outcome.get_result()
+
+    # Only add attachments for actual test calls, not setup/teardown
+    if rep.when == "call" and rep.failed:
+        # Attach screenshots
+        screenshots = glob.glob("test-results/**/*.png", recursive=True)
+        for screenshot in screenshots:
+            with open(screenshot, "rb") as f:
+                allure.attach(f.read(), name=os.path.basename(screenshot), attachment_type=allure.attachment_type.PNG)
+        # Attach videos
+        videos = glob.glob("test-results/**/*.webm", recursive=True)
+        for video in videos:
+            with open(video, "rb") as f:
+                allure.attach(f.read(), name=os.path.basename(video), attachment_type=allure.attachment_type.WEBM)
