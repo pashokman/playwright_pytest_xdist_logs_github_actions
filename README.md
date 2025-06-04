@@ -1,5 +1,12 @@
-This is an example of logging into 1 file, while using pytest-xdist (parallel test execution).
-
+In this framework I implemented:
+- logging into 1 file, while using pytest-xdist (parallel test execution),
+- allure reporting, 
+- screenshot and video on failure and also attached it to allure-report,
+- moved pytest options into a pytest.ini file,
+- pytest marker into test,
+- rerun functionality to avoid flacky tests,
+- cleanup allure-results (report) and test-results (screenshots and videos on failure) folders before each pytest run,
+- test data moved into separate file.
 
 # How to run local
 1. Create virtual environment.
