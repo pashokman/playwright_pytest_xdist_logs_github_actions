@@ -19,9 +19,9 @@ playwright install
 ```
 python .\utils\logs\log_server.py
 ```
-5. Open first terminal and start testing:
+5. Open first terminal and run tests V(to change pytest run options, use `pytest.ini` file):
 ```
-pytest -v -s -k test_item_names_text --browser webkit -m smoke -n 4 --alluredir=allure-results
+pytest
 ```
 
 You can download `automation.log` file after test run completed.
