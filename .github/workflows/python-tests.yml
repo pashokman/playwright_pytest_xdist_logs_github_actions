@@ -31,7 +31,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest -v -s -k test_item_names_text --browser webkit -m smoke -n 4 --alluredir=allure-results --reruns 2
+          pytest
 
       - name: Upload log artifact
         if: always()
@@ -46,3 +46,9 @@ jobs:
         with:
           name: allure-results
           path: allure-results
+
+      - name: Upload Playwright screenshots and video on failure
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-screenshots-videos-on-failure
+          path: test-results/

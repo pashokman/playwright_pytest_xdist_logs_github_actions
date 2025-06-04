@@ -45,9 +45,14 @@ def before_and_after_each_test(request):
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_sessionstart(session):
-    # Before each test run clear "allure-results" folder
+    # Before each test run clear "allure-results" and "test-results" folders
     
-    results_dir = os.path.join(os.getcwd(), "allure-results")
-    if os.path.exists(results_dir):
-        shutil.rmtree(results_dir)
-        os.makedirs(results_dir)
+    allure_dir = os.path.join(os.getcwd(), "allure-results")
+    if os.path.exists(allure_dir):
+        shutil.rmtree(allure_dir)
+        os.makedirs(allure_dir)
+
+    img_vid_dir = os.path.join(os.getcwd(), "test-results")
+    if os.path.exists(img_vid_dir):
+        shutil.rmtree(img_vid_dir)
+        os.makedirs(img_vid_dir)
