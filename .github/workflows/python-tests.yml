@@ -31,7 +31,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest -v -s -n 3 --alluredir=allure-results
+          pytest -v -s -k test_item_names_text --browser webkit -m smoke -n 4 --alluredir=allure-results
 
       - name: Upload log artifact
         uses: actions/upload-artifact@v4

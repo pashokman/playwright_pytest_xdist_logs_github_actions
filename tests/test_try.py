@@ -5,9 +5,11 @@ CREDENTIALS = [
     ("standard_user", "secret_sauce"),
     ("problem_user", "secret_sauce"),
     ("performance_glitch_user", "secret_sauce"),
+    ("incorrect_login", "incorrect_pwd"),
 ]
 
 
+@pytest.mark.smoke
 @pytest.mark.parametrize(
     "username, password",
     CREDENTIALS,

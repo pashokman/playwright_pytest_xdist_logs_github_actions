@@ -1,3 +1,5 @@
+import os
+import shutil
 import pytest
 from pages.login_page import LoginPage
 from playwright.sync_api import Page
@@ -6,6 +8,8 @@ from utils.logs.logger import Logger
 
 @pytest.fixture()
 def login(page: Page, request):
+    # Open and return Login page and prepare it to logging process
+
     browser_name = request.config.getoption("--browser")
     test_file = request.node.fspath
     test_name = request.node.name
@@ -21,6 +25,8 @@ def login(page: Page, request):
 
 @pytest.fixture(scope="function", autouse=True)
 def before_and_after_each_test(request):
+    # Add START and END marks before each test to separate them.
+
     test_file = request.node.fspath
     test_name = request.node.name
     browser_name = request.config.getoption("--browser")
@@ -35,3 +41,13 @@ def before_and_after_each_test(request):
     yield
 
     logger_with_context.info(f"[TEST END]")
+
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_sessionstart(session):
+    # Before each test run clear "allure-results" folder
+    
+    results_dir = os.path.join(os.getcwd(), "allure-results")
+    if os.path.exists(results_dir):
+        shutil.rmtree(results_dir)
+        os.makedirs(results_dir)

@@ -21,6 +21,7 @@ class LoginPage:
             self.logger.info(f"URL - {self.URL} opened!")
         except Exception as e:
             self.logger.error(f"{str(e)}")
+            raise
 
     def fill_usrname_field(self, usrname):
         try:
@@ -28,6 +29,7 @@ class LoginPage:
             self.logger.info(f"Useraname field filled with '{usrname}'")
         except Exception as e:
             self.logger.error(f"{str(e)}")
+            raise
 
     def fill_usrpwd_field(self, pwd):
         try:
@@ -35,6 +37,7 @@ class LoginPage:
             self.logger.info(f"Password field filled with '{pwd}'")
         except Exception as e:
             self.logger.error(f"{str(e)}")
+            raise
 
     def click_login_button(self):
         try:
@@ -42,6 +45,7 @@ class LoginPage:
             self.logger.info(f"Click on login btn successful.")
         except Exception as e:
             self.logger.error(f"{str(e)}")
+            raise
 
     def fill_login_credentials(self, name, pwd):
         self.fill_usrname_field(name)
@@ -57,3 +61,4 @@ class LoginPage:
             self.logger.info(f"Backpack item name contains text '{text}'")
         except Exception as e:
             self.logger.error(f"{str(e)}")
+            raise
