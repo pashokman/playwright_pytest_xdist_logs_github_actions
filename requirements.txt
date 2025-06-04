@@ -3,3 +3,4 @@ playwright
 pyclean
 pytest-xdist
 allure-pytest
+pytest-rerunfailures
