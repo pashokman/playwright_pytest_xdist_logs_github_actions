@@ -19,7 +19,7 @@ class LoginPage:
 
     def goto(self):
         try:
-            self.page.goto("/")
+            self.page.goto(self.URL)
             self.logger.info(f"Secret URL - opened!")
             # self.page.goto(self.URL)
             # self.logger.info(f"URL - {self.URL} opened!")
