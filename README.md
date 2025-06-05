@@ -7,7 +7,8 @@ In this framework I implemented:
 - rerun functionality to avoid flacky tests,
 - cleanup allure-results (report) and test-results (screenshots and videos on failure) folders before each pytest run,
 - test data moved into separate file,
-- trace on failed tests.
+- trace on failed tests,
+- secret variable - BASE_URL.
 
 # How to run local
 1. Create virtual environment.

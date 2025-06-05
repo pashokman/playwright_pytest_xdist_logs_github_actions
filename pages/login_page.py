@@ -1,9 +1,11 @@
 from playwright.sync_api import expect
+import os
 
 
 class LoginPage:
 
-    URL = "https://www.saucedemo.com/"
+    # URL = "https://www.saucedemo.com/"
+    URL = os.environ.get("BASE_URL")
 
     USERNAME_FIELD_LOC = '[data-test="username"]'
     USERPWD_FIELD_LOC = '[data-test="password"]'
@@ -17,8 +19,10 @@ class LoginPage:
 
     def goto(self):
         try:
-            self.page.goto(self.URL)
-            self.logger.info(f"URL - {self.URL} opened!")
+            self.page.goto("/")
+            self.logger.info(f"Secret URL - opened!")
+            # self.page.goto(self.URL)
+            # self.logger.info(f"URL - {self.URL} opened!")
         except Exception as e:
             self.logger.error(f"{str(e)}")
             raise
