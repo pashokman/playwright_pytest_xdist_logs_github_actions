@@ -40,7 +40,7 @@ To see Report, download `allure-report` artifact, extract folder from a zip file
 allure serve allure-results
 ```
 
-To see the trace of failed test you should download `allure-report` artifact, extract from a zip file, run the command:
+To see the trace of failed test you should download `playwright-screenshots-videos-traces-on-failure` artifact, extract from a zip file, run the command (before using this command should install NodeJS):
 ```
-playwright show-trace test-results/tests-test-try-py-test-item-names-text-webkit-incorrect-login-incorrect-pwd/trace.zip
+npx playwright show-trace test-results/tests-test-try-py-test-item-names-text-webkit-incorrect-login-incorrect-pwd/trace.zip
 ```

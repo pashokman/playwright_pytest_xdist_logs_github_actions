@@ -47,16 +47,9 @@ jobs:
           name: allure-results
           path: allure-results
 
-      - name: Upload Playwright screenshots and video on failure
+      - name: Upload Playwright screenshots, videos and traces on failure
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-screenshots-videos-on-failure
-          path: test-results/
-
-      - name: Upload Traces on failure
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-traces
+          name: playwright-screenshots-videos-traces-on-failure
           path: test-results/
