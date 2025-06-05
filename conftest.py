@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import os
 import allure
 import glob
@@ -21,7 +25,7 @@ def login(page: Page, request):
     logger_with_context = logger_instance.get_adapter(test_context=log_line_prefix)
 
     login_page = LoginPage(page, logger=logger_with_context)
-    login_page.goto()
+    login_page.goto_base_url()
     return login_page
 
 

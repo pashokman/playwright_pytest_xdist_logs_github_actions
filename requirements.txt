@@ -4,3 +4,4 @@ pyclean
 pytest-xdist
 allure-pytest
 pytest-rerunfailures
+python-dotenv

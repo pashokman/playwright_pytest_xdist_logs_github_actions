@@ -4,7 +4,6 @@ import os
 
 class LoginPage:
 
-    # URL = "https://www.saucedemo.com/"
     URL = os.environ.get("BASE_URL")
 
     USERNAME_FIELD_LOC = '[data-test="username"]'
@@ -17,12 +16,12 @@ class LoginPage:
         self.page = page
         self.logger = logger
 
-    def goto(self):
+    def goto_base_url(self):
+        if not self.URL:
+            raise ValueError("BASE_URL environment variable is not set!")
         try:
             self.page.goto(self.URL)
-            self.logger.info(f"Secret URL - opened!")
-            # self.page.goto(self.URL)
-            # self.logger.info(f"URL - {self.URL} opened!")
+            self.logger.info(f"BASE_URL - opened!")
         except Exception as e:
             self.logger.error(f"{str(e)}")
             raise
