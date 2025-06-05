@@ -6,7 +6,8 @@ In this framework I implemented:
 - pytest marker into test,
 - rerun functionality to avoid flacky tests,
 - cleanup allure-results (report) and test-results (screenshots and videos on failure) folders before each pytest run,
-- test data moved into separate file.
+- test data moved into separate file,
+- trace on failed tests.
 
 # How to run local
 1. Create virtual environment.
@@ -34,7 +35,12 @@ pytest
 You can download `automation.log` file after test run completed.
 
 You can download `allure-report` file after test run completed.  
-To see actual results of allure, download `allure-report` artifact, extract folder from a zip file, run command:
+To see Report, download `allure-report` artifact, extract folder from a zip file, run the command:
 ```
 allure serve allure-results
+```
+
+To see the trace of failed test you should download `allure-report` artifact, extract from a zip file, run the command:
+```
+playwright show-trace test-results/tests-test-try-py-test-item-names-text-webkit-incorrect-login-incorrect-pwd/trace.zip
 ```
