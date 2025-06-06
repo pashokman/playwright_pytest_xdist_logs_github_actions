@@ -48,6 +48,13 @@ def before_and_after_each_test(request):
     logger_with_context.info(f"[TEST END]")
 
 
+@pytest.fixture(scope="function", autouse=True)
+def set_viewport_size(page):
+    width = int(os.environ.get("VIEWPORT_WIDTH", 1920))
+    height = int(os.environ.get("VIEWPORT_HEIGHT", 945))
+    page.set_viewport_size({"width": width, "height": height})
+
+
 @pytest.hookimpl(tryfirst=True)
 def pytest_sessionstart(session):
     # Before each pytest run, clear "allure-results" and "test-results" folders
