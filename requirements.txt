@@ -5,3 +5,4 @@ pytest-xdist
 allure-pytest
 pytest-rerunfailures
 python-dotenv
+pytest-html

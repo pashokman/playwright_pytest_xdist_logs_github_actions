@@ -1,16 +1,16 @@
-from dotenv import load_dotenv
-
-load_dotenv()
-
-import os
 import allure
 import glob
+import os
 import pytest
 import shutil
 
+from dotenv import load_dotenv
 from pages.login_page import LoginPage
 from playwright.sync_api import Page
 from utils.logs.logger import Logger
+
+
+load_dotenv()
 
 
 @pytest.fixture()
@@ -60,6 +60,11 @@ def pytest_sessionstart(session):
     if os.path.exists(img_vid_trace_dir):
         shutil.rmtree(img_vid_trace_dir)
         os.makedirs(img_vid_trace_dir)
+
+    html_report = os.path.join(os.getcwd(), "report")
+    if os.path.exists(html_report):
+        shutil.rmtree(html_report)
+        os.makedirs(html_report)
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

@@ -8,7 +8,8 @@ In this framework I implemented:
 - cleanup allure-results (report) and test-results (screenshots and videos on failure) folders before each pytest run,
 - test data moved into separate file,
 - trace on failed tests,
-- secret variable - BASE_URL.
+- secret variable - BASE_URL,
+- pytest-html report.
 
 # How to run local
 1. Create virtual environment.
@@ -33,15 +34,16 @@ python .\utils\logs\log_server.py
 pytest
 ```
 
-You can download `automation.log` file after test run completed.
+To see framework Log, download `automation.log` artifact after test run completed, extract file from a zip archive and open, using any text editor.
 
-You can download `allure-report` file after test run completed.  
-To see Report, download `allure-report` artifact, extract folder from a zip file, run the command:
+To see Allure-report, download `allure-report` artifact, extract folder from a zip file, run the command (in current folder open cmd):
 ```
 allure serve allure-results
 ```
 
-To see the trace of failed test you should download `playwright-screenshots-videos-traces-on-failure` artifact, extract from a zip file, run the command (before using this command should install NodeJS):
+To see the Trace of failed test you should download `playwright-screenshots-videos-traces-on-failure` artifact, extract from a zip file, run the command (in current folder open cmd, before using this command should install NodeJS):
 ```
 npx playwright show-trace test-results/tests-test-try-py-test-item-names-text-webkit-incorrect-login-incorrect-pwd/trace.zip
 ```
+
+To see the Pytest-html report, download `pytest-html-report` artifact, extract folder from a zip file and open `myreport.html` file, using any browser.
