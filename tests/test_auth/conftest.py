@@ -21,7 +21,7 @@ def next_authorization(browser, request):
     login_page.goto_base_url()
     login_page.login("tomsmith", "SuperSecretPassword!")
 
-    yield context
+    yield login_page
 
 
 @pytest.fixture(scope="session")
