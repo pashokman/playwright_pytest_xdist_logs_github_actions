@@ -12,7 +12,7 @@ class HerokuLoginPage(Login):
 
     FIRST_MESSAGE_LOC = "#flash"
     SECOND_MESSAGE_LOC = "h4"
-    LOGOUT_BTN_TEXT_LOC = "#context"
+    LOGOUT_BTN_TEXT_LOC = "#content"
     LOGOUT_BTN_LOC = '//a[@href="/logout"]'
 
     def __init__(self, page, logger):
