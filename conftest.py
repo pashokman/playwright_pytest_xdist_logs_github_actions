@@ -5,8 +5,9 @@ import pytest
 import shutil
 
 from dotenv import load_dotenv
-from pages.login_page import LoginPage
+from pages.saucelab_login_page import SauceLoginPage
 from playwright.sync_api import Page
+from utils.logs.logger_with_context import get_logger_with_context
 from utils.logs.logger import Logger
 
 
@@ -15,16 +16,9 @@ load_dotenv()
 
 @pytest.fixture()
 def login(page: Page, request):
-    # Open and return Login page and prepare it to logging process
-    browser_name = request.config.getoption("--browser")
-    test_file = request.node.fspath
-    test_name = request.node.name
-    log_line_prefix = f"[{browser_name}]::{test_file}::{test_name}"
+    log = get_logger_with_context(request, log_name="Sauce login page")
+    login_page = SauceLoginPage(page, logger=log)
 
-    logger_instance = Logger(log_name="Login page")
-    logger_with_context = logger_instance.get_adapter(test_context=log_line_prefix)
-
-    login_page = LoginPage(page, logger=logger_with_context)
     login_page.goto_base_url()
     return login_page
 
@@ -72,6 +66,11 @@ def pytest_sessionstart(session):
     if os.path.exists(html_report):
         shutil.rmtree(html_report)
         os.makedirs(html_report)
+
+    log_file = os.path.join(os.getcwd(), "automation.log")
+    if os.path.exists(log_file):
+        with open(log_file, "w"):
+            pass
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

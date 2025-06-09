@@ -31,7 +31,10 @@ jobs:
 
       - name: Run tests
         env:
-          BASE_URL: ${{ secrets.BASE_URL }}
+          SOUCELAB_BASE_URL: ${{ secrets.SOUCELAB_BASE_URL }}
+          HEROKUAPP_BASE_URL: ${{ secrets.HEROKUAPP_BASE_URL }}
+          VIEWPORT_HEIGHT: ${{ secrets.VIEWPORT_HEIGHT }}
+          VIEWPORT_WIDTH: ${{ secrets.VIEWPORT_WIDTH }}
         run: |
           pytest
 
