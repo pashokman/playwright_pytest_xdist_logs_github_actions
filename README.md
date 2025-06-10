@@ -10,7 +10,7 @@ In this framework I implemented:
 - trace on failed tests,
 - secret variable - BASE_URL,
 - pytest-html report,
-- saving authorization data (session) for a context into a json files, to user them in tests (```test_auth``` folder)? works only for browsers - webkit, firefox.
+- saving authorization data (session) for a context into a json files, to user them in tests (```test_auth``` folder), works only for browsers - webkit, firefox.
 
 # How to run local
 1. Create virtual environment.
