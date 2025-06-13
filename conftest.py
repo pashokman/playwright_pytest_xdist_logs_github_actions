@@ -1,3 +1,4 @@
+from pathlib import Path
 import allure
 import glob
 import os
@@ -5,6 +6,7 @@ import pytest
 import shutil
 
 from dotenv import load_dotenv
+from slugify import slugify
 from pages.saucelab_login_page import SauceLoginPage
 from playwright.sync_api import Page
 from utils.logs.logger_with_context import get_logger_with_context
@@ -51,7 +53,7 @@ def set_viewport_size(page):
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_sessionstart(session):
-    # Before each pytest run, clear "allure-results" and "test-results" folders
+    # Before each pytest run, clear "allure-results", "test-results", "report" folders and "automation.log" file
     allure_dir = os.path.join(os.getcwd(), "allure-results")
     if os.path.exists(allure_dir):
         shutil.rmtree(allure_dir)
@@ -76,18 +78,31 @@ def pytest_sessionstart(session):
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     # Execute all other hooks to obtain the report object
+    pytest_html = item.config.pluginmanager.getplugin("html")
     outcome = yield
-    rep = outcome.get_result()
+    report = outcome.get_result()
 
-    # Only add attachments for actual test calls, not setup/teardown
-    if rep.when == "call" and rep.failed:
-        # Attach screenshots
+    # Only add attachments for actual failed test calls, not setup/teardown
+    if report.when == "call" and report.failed:
+        # Attach screenshots to allure-report
         screenshots = glob.glob("test-results/**/*.png", recursive=True)
         for screenshot in screenshots:
             with open(screenshot, "rb") as f:
                 allure.attach(f.read(), name=os.path.basename(screenshot), attachment_type=allure.attachment_type.PNG)
-        # Attach videos
+        # Attach videos to allure-report
         videos = glob.glob("test-results/**/*.webm", recursive=True)
         for video in videos:
             with open(video, "rb") as f:
                 allure.attach(f.read(), name=os.path.basename(video), attachment_type=allure.attachment_type.WEBM)
+
+        # Pytest-html screenshot attachment
+        extras = getattr(report, "extras", [])
+        if report.failed and "page" in item.funcargs and pytest_html:
+            page = item.funcargs["page"]
+            screenshot_dir = Path("test-results")
+            screenshot_dir.mkdir(exist_ok=True)
+            screen_file = screenshot_dir / f"{slugify(item.nodeid)}.png"
+            page.screenshot(path=str(screen_file))
+            rel_path = os.path.relpath(screen_file, "report")
+            extras.append(pytest_html.extras.image(rel_path))
+        report.extras = extras
