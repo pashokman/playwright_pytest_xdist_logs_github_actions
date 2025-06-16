@@ -1,16 +1,26 @@
+from typing import Any
+
+
 class Login:
+    """
+    Base page class for login functionality.
+    """
 
-    URL = None
+    URL: str | None = None
 
-    USERNAME_FIELD_LOC = None
-    USERPWD_FIELD_LOC = None
-    LOGIN_BTN_LOC = None
+    USERNAME_FIELD_LOC: str | None = None
+    USERPWD_FIELD_LOC: str | None = None
+    LOGIN_BTN_LOC: str | None = None
 
-    def __init__(self, page, logger):
+    def __init__(self, page: Any, logger: Any):
+        """
+        :param page: Playwright page object
+        :param logger: Logger instance
+        """
         self.page = page
         self.logger = logger
 
-    def fill_usrname_field(self, usrname):
+    def fill_usrname_field(self, usrname: str):
         try:
             self.page.locator(self.USERNAME_FIELD_LOC).fill(usrname)
             self.logger.info(f"Useraname field filled with '{usrname}'")
@@ -18,7 +28,7 @@ class Login:
             self.logger.error(f"{str(e)}")
             raise
 
-    def fill_usrpwd_field(self, pwd):
+    def fill_usrpwd_field(self, pwd: str):
         try:
             self.page.locator(self.USERPWD_FIELD_LOC).fill(pwd)
             self.logger.info(f"Password field filled with '{pwd}'")
@@ -44,10 +54,10 @@ class Login:
             self.logger.error(f"{str(e)}")
             raise
 
-    def fill_login_credentials(self, name, pwd):
+    def fill_login_credentials(self, name: str, pwd: str):
         self.fill_usrname_field(name)
         self.fill_usrpwd_field(pwd)
 
-    def login(self, name, pwd):
+    def login(self, name: str, pwd: str):
         self.fill_login_credentials(name, pwd)
         self.click_login_button()

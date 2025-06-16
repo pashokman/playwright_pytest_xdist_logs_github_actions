@@ -15,10 +15,6 @@ class HerokuLoginPage(Login):
     LOGOUT_BTN_TEXT_LOC = "#content"
     LOGOUT_BTN_LOC = '//a[@href="/logout"]'
 
-    def __init__(self, page, logger):
-        self.page = page
-        self.logger = logger
-
     def goto_base_url(self):
         if not self.URL:
             raise ValueError("BASE_URL environment variable is not set!")
@@ -35,13 +31,13 @@ class HerokuLoginPage(Login):
     def get_first_message_text(self):
         return self.page.locator(self.FIRST_MESSAGE_LOC).inner_text()
 
-    def is_first_message_has_text(self, text):
+    def is_first_message_has_text(self, text: str):
         return text in self.get_first_message_text()
 
     def get_second_message_text(self):
         return self.page.locator(self.SECOND_MESSAGE_LOC).inner_text()
 
-    def is_second_message_has_text(self, text):
+    def is_second_message_has_text(self, text: str):
         return text in self.get_second_message_text()
 
     def is_logout_btn_present(self):

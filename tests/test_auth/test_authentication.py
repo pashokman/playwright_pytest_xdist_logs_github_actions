@@ -1,6 +1,10 @@
 from pages.herokuapp_login_page import HerokuLoginPage
 from utils.logs.logger_with_context import get_logger_with_context
 
+"""
+Each test should have only one assertion. These tests contain many assertions just for education purposes.
+"""
+
 
 def test_first_login(next_authorization) -> None:
 

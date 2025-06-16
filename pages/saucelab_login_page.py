@@ -13,11 +13,7 @@ class SauceLoginPage(Login):
 
     BACKPACK_TEXT_LOC = '[data-test="item-4-title-link"] [data-test="inventory-item-name"]'
 
-    def __init__(self, page, logger):
-        self.page = page
-        self.logger = logger
-
-    def is_backpack_item_name_contain_text(self, text):
+    def is_backpack_item_name_contain_text(self, text: str):
         try:
             expect(self.page.locator(self.BACKPACK_TEXT_LOC)).to_contain_text(text)
             self.logger.info(f"Backpack item name contains text '{text}'")
